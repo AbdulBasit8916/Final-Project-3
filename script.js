@@ -330,8 +330,20 @@ document.addEventListener("DOMContentLoaded", () => {
             const name = document.getElementById("vendorName")?.value.trim() || "";
             const type = document.getElementById("vendorType")?.value || "";
             const bio = document.getElementById("vendorBio")?.value.trim() || "";
+            const phone = document.getElementById("vendorPhone")?.value.trim() || ""; // Assuming a phone input field exists with ID 'vendorPhone'
 
             if (vendorError) vendorError.textContent = "";
+
+            // Validation: Check if any field is empty or phone number is less than 11 digits
+            if (!name || !type || !bio || !phone) {
+                if (vendorError) vendorError.textContent = "Kripya sabhi fields bharein. Koi bhi jagah khaali nahi honi chahiye.";
+                return;
+            }
+
+            if (phone.length < 11) {
+                if (vendorError) vendorError.textContent = "Phone number kam az kam 11 digits ka hona zaroori hai.";
+                return;
+            }
 
             if (vendorGrid) {
                 const card = document.createElement("article");
